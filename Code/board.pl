@@ -37,6 +37,7 @@ translateChar(0, ' ').
 translateChar(1, 1).
 translateChar(2, 2).
 translateChar(3, 3).
+translateChar(4, 4).
 
 drawEmptySpaces(NoS):- %NoS -> number of empty spaces to draw
     NoS =\= 0,
