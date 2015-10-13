@@ -4,6 +4,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  GAMEPLAY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-start(B):-
-    emptyBoard(B),
-    printBoard(B).
+start(BoardState):-
+    emptyBoard(BoardState),
+    printBoard(BoardState).
