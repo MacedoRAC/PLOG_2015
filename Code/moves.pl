@@ -58,6 +58,40 @@ checkCorner(1):-
 	checkInRow(BoardState, 1, 0, 0). %bottom left cell
 checkCorner(1):-
 	checkInRow(BoardState, 1, 0, 1). %bottom right cell
+checkCorner(2):-
+	checkInRow(BoardState, 0, 0, 3). %left cell
+checkCorner(2):-
+	checkInRow(BoardState, 1, 0, 4). %bottom left cell
+checkCorner(2):-
+	checkInRow(BoardState, 1, 0, 5). %bottom right cell
+checkCorner(3):-
+	checkInRow(BoardState, 4, 0, 7). %left cell
+checkCorner(3):-
+	checkInRow(BoardState, 3, 0, 7). %top left cell
+checkCorner(3):-
+	checkInRow(BoardState, 5, 0, 7). %bottom left cell
+checkCorner(4):-
+	checkInRow(BoardState, 8, 0, 3). %left cell
+checkCorner(4):-
+	checkInRow(BoardState, 7, 0, 4). %top left cell
+checkCorner(4):-
+	checkInRow(BoardState, 7, 0, 5). %top right cell
+checkCorner(5):-
+	checkInRow(BoardState, 8, 0, 1). %right cell
+checkCorner(5):-
+	checkInRow(BoardState, 7, 0, 0). %top left cell
+checkCorner(5):-
+	checkInRow(BoardState, 7, 0, 1). %top right cell
+checkCorner(6):-
+	checkInRow(BoardState, 4, 0, 1). %right cell
+checkCorner(6):-
+	checkInRow(BoardState, 3, 0, 0). %bottom left cell
+checkCorner(6):-
+	checkInRow(BoardState, 5, 0, 0). %bottom right cell
+
+
+
+
 
 %fazer para os restantes cantos
 
