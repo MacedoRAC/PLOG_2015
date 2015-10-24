@@ -31,6 +31,15 @@ emptyBoard([[0,0,0,0,0],
             [0,0,0,0,0]]).
 
 
+initializePieces([15, 15, 15, 15]). % RGBY
+
+
+colorsList([1, 2, 3, 4]).
+
+
+initializePlayers([], PlayerActive):-
+    PlayerActive is 0.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  BOARD PRINTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 translateChar(0, ' ').
