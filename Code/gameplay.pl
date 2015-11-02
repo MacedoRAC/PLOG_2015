@@ -1,5 +1,6 @@
 :- [board].
 :- [moves].
+:- [utils].
 
 :- use_module(library(lists)).
 :- use_module(library(clpfd)).
@@ -44,6 +45,7 @@ comConfig(_).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MENUS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 printBanner(_):-
+	nl,
 	write('======================================'), nl,
 	write('==             MEERKATS             =='), nl,
 	write('======================================'), nl,nl,nl.
@@ -69,8 +71,9 @@ gameMode(Choice, Colors):-
 menuStart(BoardState, Pieces, Colors, Players):-
 	printBanner(_),
 	gameModeMenu(_),
-	readChar(Choice),
-	Choice > 0, !,
+	get_char(Choice),
+	convertToInt(Choice),
+	Choice > 0,
 	Choice < 5,
 	gameMode(Choice, Colors, Players).
 menuStart(BoardState, Pieces, Colors, Players):-
@@ -93,5 +96,5 @@ launchGame(_).
 
 start(BoardState, Pieces, Colors, Players):-
     initializeStateOfGame(BoardState, Pieces, Colors, Players),
-    %menuStart(BoardState, Pieces, Colors, Players).
+    menuStart(BoardState, Pieces, Colors, Players).
     printBoard(BoardState).
