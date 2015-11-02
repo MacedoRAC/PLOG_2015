@@ -160,58 +160,57 @@ checkAdjacentCells(Board, Row, Column):-
 checkAdjacentCells(Board, Row, Column):- %most comon case
 	checkMiddleCell(Board, Row, Column).
 
-
-setCell(Color, Column, Index, [H|T], NewRow):-
+setCell(Color, Column, Index, [], NewRow,FinalRow):-
+	FinalRow = NewRow. 
+setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
 	Column = Index,
-	append(NewRow, Color, NewRow2),
-	Index2 is Index + 1,
-	setCell(Color, _, Index2, T, NewRow2).
-setCell(Color, Column, Index, [H|T], NewRow):-
-	append(NewRow, H, NewRow2),
-	Index2 is Index + 1,
-	setCell(Color, _, Index2, T, NewRow2).
-setCell(_, _, _, [], NewRow).
+	append(NewRow, [Color], NewRow2),
+	Index2 is Index+1,
+	setCell(Color, Column, Index2, T, NewRow2,FinalRow).
+setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
+	append(NewRow, [H], NewRow2),
+	Index2 is Index+1,
+	setCell(Color, Column, Index2, T, NewRow2,FinalRow).
 
-
-addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard):-
+addPieceToBoard([], Color, Row, Column, Index, NewBoard, FinalBoard):-
+	FinalBoard = NewBoard.
+addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 	Row = Index,
 	createEmptyList(NewRow),
-	setCell(Color, Column, 0, H, NewRow),
-	append(NewBoard, NewRow, NewBoard2),
+	setCell(Color, Column, 0, H, NewRow,FinalRow),
+	append(NewBoard, [FinalRow], NewBoard2),
 	Index2 is Index + 1,
-	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2).
-addPieceToBoard([H|T], Color, Row, _, Index, NewBoard):-
-	append(NewBoard, H, NewBoard2),
+	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2, FinalBoard).
+addPieceToBoard([H|T], Color, Row, _, Index, NewBoard, FinalBoard):-
+	append(NewBoard, [H], NewBoard2),
 	Index2 is Index + 1,
-	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2).
-addPieceToBoard([], _, _, _, _, NewBoard):-
-	BoardState is NewBoard.
+	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2, FinalBoard).
 
 
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
 	Row = 4, !,
 	Column = 8, !,
 	checkCorner(BoardState, 3),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, []).
+	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
 	Row = 4, !,
 	Column = 0, !,
 	checkCorner(BoardState, 6),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, []).
+	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
 	Row = 4, !,
 	checkMiddleCell(BoardState ,Row, Column),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, []).
+	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
 	Row < 4, !,
 	checkAdjacentCells(BoardState ,Row, Column),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, []).
-tryToAddPieceToBoard(BoardState,	 Color, Row, Column):-
+	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
+tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 	Row > 4, !,
 	RevRow is 8 - Row,
 	reverse(BoardState, ReversedBoard),
 	checkAdjacentCells(ReversedBoard ,RevRow, Column),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, []).
+	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 
 
 
