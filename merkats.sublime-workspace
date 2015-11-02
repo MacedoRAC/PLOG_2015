@@ -1,0 +1,429 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Inde",
+				"Index"
+			],
+			[
+				"In",
+				"Index2"
+			],
+			[
+				"che",
+				"checkInRow"
+			],
+			[
+				"Col",
+				"ColumnDest"
+			],
+			[
+				"Row",
+				"RowDest"
+			],
+			[
+				"Colum",
+				"ColumnDest"
+			],
+			[
+				"New",
+				"NewRow"
+			],
+			[
+				"Ind",
+				"Index2"
+			],
+			[
+				"inde",
+				"Index"
+			],
+			[
+				"Boa",
+				"BoardState"
+			],
+			[
+				"Bo",
+				"BoardState"
+			],
+			[
+				"chec",
+				"checkMiddleCell"
+			],
+			[
+				"Corner",
+				"CornerNumber"
+			],
+			[
+				"dra",
+				"drawEmptySpaces"
+			],
+			[
+				"No",
+				"NoV2"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Code/board.pl",
+			"settings":
+			{
+				"buffer_size": 3053,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Code/gameplay.pl",
+			"settings":
+			{
+				"buffer_size": 2595,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Code/moves.pl",
+			"settings":
+			{
+				"buffer_size": 6023,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "prol",
+		"selected_items":
+		[
+			[
+				"prol",
+				"Set Syntax: SWI-Prolog"
+			],
+			[
+				"pro",
+				"Set Syntax: SWI-Prolog"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"bs3-hm",
+				"Snippet: bs3-html5-template"
+			],
+			[
+				"css",
+				"Snippet: bs3-cdn-css"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"snip",
+				"Snippet: html"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"prolo",
+				"Set Syntax: SWI-Prolog"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/C/Users/mario/Copy/Diversos/Contas.txt",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/utils.pl",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/gameplay.pl",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Meerkats.sublime-project",
+		"/C/Users/mario/Desktop/VueJS_teste/app.js",
+		"/C/Users/mario/Desktop/VueJS_teste/index.html",
+		"/C/Users/mario/Code/Ludustech/AwpSpain/public/ammap/spainHigh.svg",
+		"/C/Users/mario/Code/Ludustech/AwpSpain/public/index.html",
+		"/C/Users/mario/AppData/Local/Temp/7zE32EB.tmp/index.html",
+		"/C/Users/mario/AppData/Local/Temp/7zEE2C.tmp/index.html",
+		"/C/Users/mario/Desktop/admin",
+		"/C/Users/mario/Desktop/The Pirate Jogos - Project CARS/LEIA __ IMPORTANTE - SEED.txt",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/board.pl",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/moves.pl",
+		"/C/windows-version.txt",
+		"/C/Users/mario/Documents/André/Ludus/cristaltec_credentials.txt",
+		"/C/Users/mario/Documents/André/Ludus/ludus_passwords.txt",
+		"/C/Users/mario/.homestead/Homestead.yaml",
+		"/C/Users/mario/Desktop/hosts",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Images/empty_board.png",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/mario/Desktop/memsql-ops-4.1.7/README",
+		"/C/Users/mario/Desktop/mfes_3.txt",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/board (1).pl",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/boardAscii.pl",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/boardAscii.pl",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/.gitignore",
+		"/C/Users/mario/Downloads/templateLatex/template.tex",
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/ShareLatexLink.txt",
+		"/C/Users/mario/AppData/Local/Temp/7zO97A1.tmp/template.tex",
+		"/C/Users/mario/AppData/Local/Temp/fz3temp-1/default.blade.php",
+		"/C/Users/mario/AppData/Local/Temp/fz3temp-1/navbar_pt.blade.php",
+		"/D/Software/Diversos/Sublime text 3 license.txt",
+		"/C/Users/mario/Code/Laravel/index.php",
+		"/C/HashiCorp/Vagrant/embedded/gems/gems/vagrant-1.7.4/plugins/providers/virtualbox/action.rb",
+		"/C/Users/mario/Homestead/scripts/homestead.rb",
+		"/C/Users/mario/Code/tvDisplayer/resources/js/script.js",
+		"/C/Users/mario/Homestead/Vagrantfile",
+		"/C/Users/mario/Documents/New folder/Ludus/cristaltec_credentials.txt",
+		"/C/php5.6/php.ini-development"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"launc",
+			"ES-CN",
+			"checkInRo",
+			"FILEZILLA SERVER",
+			"-",
+			"remote",
+			"vagrant gem install vagrant-vbguest",
+			"--with"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Code/board.pl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3053,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								367,
+								367
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Prolog/support/Prolog.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Code/gameplay.pl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2595,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								12
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Prolog/support/Prolog.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Code/moves.pl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6023,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4252,
+								4257
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Prolog/support/Prolog.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2142.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "merkats.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\mario\\Desktop\\NiceAdmin\\niceadmin.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 183.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

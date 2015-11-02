@@ -1,3 +1,5 @@
+:- [utils].
+
 :- use_module(library(lists)).
 :- use_module(library(clpfd)).
 
@@ -12,27 +14,35 @@ checkInRow([H|T], Row, Index, Column):-
 
 
 checkMiddleCell(Board, Row, Column):- %top left cell
-	checkInRow(Board, Row-1, 0, Column-1). 
+	R2 is Row-1,
+	C2 is C-1,
+	checkInRow(Board, R2, 0, C2). 
 checkMiddleCell(Board, Row, Column):- %top right cell
-	checkInRow(Board, Row-1, 0, Column). 
+	R2 is Row-1,
+	checkInRow(Board, R2, 0, Column). 
 checkMiddleCell(Board, Row, Column):- %right cell
-	checkInRow(Board, Row, 0, Column+1). 
+	C2 is C+1,
+	checkInRow(Board, Row, 0, C2). 
 checkMiddleCell(Board, Row, Column):- %bottom right cell
-	checkInRow(Board, Row+1, 0, Column+1). 
+	R2 is Row+1,
+	C2 is C+1,
+	checkInRow(Board, R2, 0, C2). 
 checkMiddleCell(Board, Row, Column):- %bottom left cell
-	checkInRow(Board, Row+1, 0, Column). 
+	R2 is Row+1,
+	checkInRow(Board, R2, 0, Column). 
 checkMiddleCell(Board, Row, Column):- %left cell
-	checkInRow(Board, Row, 0, Column-1). 
+	C2 is C-1,
+	checkInRow(Board, Row, 0, C2). 
 
 
 
 %===============CORNER CHECK RUELS=================
 isCorner(R, C, CornerNumber):-
-	R = 0, !,
+	R = 0,
 	C = 0,
 	CornerNumber is 1.
 isCorner(R, C, CornerNumber):-
-	R = 0, !,
+	R = 0,
 	C = 4,
 	CornerNumber is 2.
 isCorner(_, _, CornerNumber):-
@@ -73,21 +83,21 @@ isSide(R, C, SideNumber):-
 	SideNumber is 1.
 % Side 2 
 isSide(R, C, SideNumber):-
-	R = 1, !,
+	R = 1,
 	C = 5,
 	SideNumber is 2.
 isSide(R, C, SideNumber):-
-	R = 2, !,
+	R = 2,
 	C = 6,
 	SideNumber is 2.
 isSide(R, C, SideNumber):-
-	R = 3, !,
+	R = 3,
 	C = 7,
 	SideNumber is 2.
 % Side 6 
 isSide(R, C, SideNumber):-
-	C = 0, !,
-	R < 4, !,
+	C = 0,
+	R < 4,
 	R > 0,
 	SideNumber is 6.
 isSide(_, _, SideNumber):-
@@ -95,31 +105,46 @@ isSide(_, _, SideNumber):-
 
 % Side 1 (R, Index, C)
 checkSide(Board, 1, R, C):-
-	checkInRow(Board, R, 0, C+1). %right cell
+	C2 is C+1,
+	checkInRow(Board, R, 0, C2). %right cell
 checkSide(Board, 1, R, C):-
-	checkInRow(Board, R, 0, C-1). %left cell
+	C2 is C-1,
+	checkInRow(Board, R, 0, C2). %left cell
 checkSide(Board, 1, R, C):-
-	checkInRow(Board, R+1, 0, C+1). %bottom right cell
+	R2 is R+1,
+	C2 is C+1,
+	checkInRow(Board, R2, 0, C2). %bottom right cell
 checkSide(Board, 1, R, C):-
-	checkInRow(Board, R+1, 0, C). %bottom left cell
+	R2 is R+1,
+	checkInRow(Board, R2, 0, C). %bottom left cell
 % Side 2
 checkSide(Board, 2, R, C):-
-	checkInRow(Board, R-1, 0, C-1). %top cell
+	R2 is R-1,
+	checkInRow(Board, R2, 0, C2). %top cell
+checkSide(Board, 2, R, C):-	
+	C2 is C-1,
+	checkInRow(Board, R, 0, C2). %top left cell
 checkSide(Board, 2, R, C):-
-	checkInRow(Board, R, 0, C-1). %top left cell
+	R2 is R+1,
+	checkInRow(Board, R2, 0, C). %left cell
 checkSide(Board, 2, R, C):-
-	checkInRow(Board, R+1, 0, C). %left cell
-checkSide(Board, 2, R, C):-
-	checkInRow(Board, R+1, 0, C+1). %bottom cell
+	R2 is R+1,
+	C2 is C+1,
+	checkInRow(Board, R2, 0, C2). %bottom cell
 % Side 6
 checkSide(Board, 6, R, C):-
-	checkInRow(Board, R-1, 0, C). %top cell
+	R2 is R-1,
+	checkInRow(Board, R2, 0, C). %top cell
 checkSide(Board, 6, R, C):-
-	checkInRow(Board, R, 0, C+1). %right cell
+	C2 is C+1,
+	checkInRow(Board, R, 0, C2). %right cell
 checkSide(Board, 6, R, C):-
-	checkInRow(Board, R+1, 0, C+1). %bottom right cell
+	R2 is R+1,
+	C2 is C+1,
+	checkInRow(Board, R2, 0, C2). %bottom right cell
 checkSide(Board, 6, R, C):-
-	checkInRow(Board, R+1, 0, C). %bottom left cell
+	R2 is R+1,
+	checkInRow(Board, R2, 0, C). %bottom left cell
 
 
 
@@ -142,7 +167,6 @@ setCell(Color, Column, Index, [H|T], NewRow):-
 	Index2 is Index + 1,
 	setCell(Color, _, Index2, T, NewRow2).
 setCell(Color, Column, Index, [H|T], NewRow):-
-	Column = Index,
 	append(NewRow, H, NewRow2),
 	Index2 is Index + 1,
 	setCell(Color, _, Index2, T, NewRow2).
@@ -151,13 +175,12 @@ setCell(_, _, _, [], NewRow).
 
 addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard):-
 	Row = Index,
-	NewRow is [],
+	createEmptyList(NewRow),
 	setCell(Color, Column, 0, H, NewRow),
 	append(NewBoard, NewRow, NewBoard2),
 	Index2 is Index + 1,
 	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2).
 addPieceToBoard([H|T], Color, Row, _, Index, NewBoard):-
-	Row = Index,
 	append(NewBoard, H, NewBoard2),
 	Index2 is Index + 1,
 	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2).
