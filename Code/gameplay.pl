@@ -24,7 +24,8 @@ randomColor(Colors, Color, NewColors):-
 
 playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
 	Index =< NoP,
-	write('Player '), write(Index+1), write('nickname: '),
+	PlayerNumb is Index + 1,
+	write('Player '), write(PlayerNumb), write(' nickname: '),
 	read(Name),
 	NewColors is [],
 	randomColor(Colors, Color, NewColors),
@@ -56,11 +57,11 @@ gameModeMenu(Choice):-
 
 gameMode(Choice, Colors,Players):-
 	Choice = 1,
-	playersConfig(Choice, 0, [], Colors, Players),
+	playersConfig(Choice, 0, Colors, Players),
 	comConfig(_),
 	launchGame(Colors, Players).
 gameMode(Choice, Colors, PLayers):-
-	playersConfig(Choice, 0, [], Colors, Players),
+	playersConfig(Choice, 0, Colors, Players),
 	launchGame(Colors, Players).
 
 menuStart(BoardState, Pieces, Colors, Players):-
@@ -86,5 +87,5 @@ launchGame(_).
 
 start(BoardState, Pieces, Colors, Players):-
     initializeStateOfGame(BoardState, Pieces, Colors, Players),
-    menuStart(BoardState, Pieces, Colors, Players).
+    menuStart(BoardState, Pieces, Colors, Players),
     printBoard(BoardState).
