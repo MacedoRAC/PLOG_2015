@@ -12,7 +12,6 @@ checkInRow([H|T], Row, Index, Column):-
 	Index2 is Index+1,
 	checkInRow(T, Row, Index2, Column).
 
-
 checkMiddleCell(Board, Row, Column):- %top left cell
 	R2 is Row-1,
 	C2 is C-1,
@@ -33,7 +32,6 @@ checkMiddleCell(Board, Row, Column):- %bottom left cell
 checkMiddleCell(Board, Row, Column):- %left cell
 	C2 is C-1,
 	checkInRow(Board, Row, 0, C2). 
-
 
 
 %===============CORNER CHECK RUELS=================
@@ -72,8 +70,6 @@ checkCorner(Board, 6):-
 	checkInRow(Board, 3, 0, 0). %bottom left cell
 checkCorner(Board, 6):-
 	checkInRow(Board, 5, 0, 0). %bottom right cell
-
-
 
 
 %===============SIDE CHECK RULES=================
@@ -147,10 +143,7 @@ checkSide(Board, 6, R, C):-
 	checkInRow(Board, R2, 0, C). %bottom left cell
 
 
-
 %===============ADD PIECE=================
-
-
 checkAdjacentCells(Board, Row, Column):-
 	isCorner(Row, Column, CornerNumber),
 	checkCorner(Board, ConerNumber).
@@ -186,7 +179,7 @@ addPieceToBoard([H|T], Color, Row, _, Index, NewBoard, FinalBoard):-
 	Index2 is Index + 1,
 	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2, FinalBoard).
 
-
+%===============CHECK IF PIECE PLACEMENT IS VALID=================
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
 	Row = 4, !,
 	Column = 8, !,
@@ -213,13 +206,22 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 
 
+%===============MOVE PIECE=================
+
+move(BoardState, Color, RowSource, ColumnSource, Moves, Direction). %TO DO -> verifies if place is empty + places piece + deletes previous piece
+
+%Orientations: 1-top right, 2-right, 3-bottom right, 4-bottom left, 5-left, 6-top left
+movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
+	RowSource <= 4,
+	move(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).
+movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
+	RowSource > 4,
+	reverse(BoardState, ReversedBoard),
+	convertOrientation(Orientation, 0),
+	move(ReversedBoard, Color, RowSource, ColumnSource, Moves, Orientation),
+	reverse(ReversedBoard, BoardState).
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MOVE PIECE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-tryToMovePiece(BoardState, Color, RowSource, ColumnSource, RowDest, ColumnDest):-
-	checkInRow(BoardState, RowDest, 0, ColumnDest), %check cell availability
-	checkPiecesInTheMiddle(RowSource, ColumnSource, RowDest, ColumnDest),
-	movePiece(Color, RowSource, ColumnSource, RowDest, ColumnDest).
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
+	movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).

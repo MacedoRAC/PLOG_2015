@@ -6,7 +6,6 @@
 :- use_module(library(clpfd)).
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLAYERS CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 deleteColor([H|T], Position, Index, NewColors):-
 	Index = Position,
@@ -16,14 +15,12 @@ deleteColor([H|T], Position, Index, NewColors):-
 	append(NewColors, H, NewColors2),
 	Index2 is Index + 1,
 	deleteColor(T, Position, Index2, NewColors2).
-	
 
 randomColor(Colors, Color, NewColors):-
 	length(Colors, Length),
 	random(0, Length, Index),
 	nth0(Index, Colors, Color),
 	deleteColor(Colors, Index, 0, NewColors).
-
 
 playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
 	Index =< NoP,
@@ -34,24 +31,22 @@ playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
 	append(Players, [Name, Color], NewPlayers),
 	Index2 is Index + 1,
 	playersConfig(NoP, Index2, NewColors, NewPlayers).
-playersConfig(_, _, _, _).
-
+playersConfig(NoP, Index, Colors, Players).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMPUTER CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 comConfig(_).
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MENUS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-printBanner(_):-
+printBanner(Choice):-
 	nl,
 	write('======================================'), nl,
 	write('==             MEERKATS             =='), nl,
 	write('======================================'), nl,nl,nl.
 
-gameModeMenu(_):-
-	nl, nl, nl,
+gameModeMenu(Choice):-
+	nl, nl,
 	write('1- Single Player'), nl,
 	write('-- Multiplayer --'), nl,
 	write('2- 2 Players'), nl,
@@ -59,29 +54,26 @@ gameModeMenu(_):-
 	write('4- 4 Players'), nl,
 	write('Choice: ').
 
-gameMode(Choice, Colors):-
+gameMode(Choice, Colors,Players):-
 	Choice = 1,
 	playersConfig(Choice, 0, [], Colors, Players),
 	comConfig(_),
-	launchGame(_).
-gameMode(Choice, Colors):-
+	launchGame(Colors, Players).
+gameMode(Choice, Colors, PLayers):-
 	playersConfig(Choice, 0, [], Colors, Players),
-	launchGame(_).
+	launchGame(Colors, Players).
 
 menuStart(BoardState, Pieces, Colors, Players):-
-	printBanner(_),
-	gameModeMenu(_),
-	get_char(Choice),
-	convertToInt(Choice),
+	printBanner(Choice),
+	gameModeMenu(Choice),
+	read(Choice),
+	skip_line,
+	write('OK'),nl,
 	Choice > 0,
 	Choice < 5,
 	gameMode(Choice, Colors, Players).
 menuStart(BoardState, Pieces, Colors, Players):-
 	menuStart(BoardState, Pieces, Colors, Players).
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  GAMEPLAY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 initializeStateOfGame(BoardState, Pieces, Colors, Players):-
@@ -90,9 +82,7 @@ initializeStateOfGame(BoardState, Pieces, Colors, Players):-
 	initializePlayers(Players, PlayerActive),
 	initializePieces(Pieces).
 
-
 launchGame(_).
-
 
 start(BoardState, Pieces, Colors, Players):-
     initializeStateOfGame(BoardState, Pieces, Colors, Players),

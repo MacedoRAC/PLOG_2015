@@ -5,24 +5,25 @@ printlist([X|List]) :-
 	write(X),nl,
 	printlist(List).
 
-copy(L,R) :- accCp(L,R).
-
-accCp([],[]).
-accCp([H|T1],[H|T2]) :- 
-	accCp(T1,T2).
-
-convertToInt(Char):-
-	integer(Char),
-	write('DONE').
-convertToInt(Char):-
-	Char = '1',
-	convertToInt(1).
-convertToInt(Char):-
-	Char = '2',
-	convertToInt(2).
-convertToInt(Char):-
-	Char = '3',
-	convertToInt(3).
-convertToInt(Char):-
-	Char = '4',
-	convertToInt(4).
+%top left -> bottom left
+convertOrientation(Orientation, Done):-
+	Done = 0
+	Orientation = 6,
+	convertOrientation(4, 1).
+%top right -> bottom right
+convertOrientation(Orientation, Done):-
+	Done = 0
+	Orientation = 1,
+	convertOrientation(3, 1).
+%bottom right-> top right
+convertOrientation(Orientation, Done):-
+	Done = 0
+	Orientation = 3,
+	convertOrientation(1, 1).
+%bottom left -> top left
+convertOrientation(Orientation, Done):-
+	Done = 0
+	Orientation = 4,
+	convertOrientation(6, 1).
+convertOrientation(Orientation, Done):-
+	Done = 1.
