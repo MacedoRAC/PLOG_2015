@@ -59,16 +59,16 @@ gameModeMenu(Choice):-
 	write('4- 4 Players'), nl,
 	write('Choice: ').
 
-gameMode(BoardState, Choice, Colors,Players, PlayerActive):-
+gameMode(BoardState, Choice, Colors, Players, PlayerActive, Pieces):-
 	Choice = 1,
 	playersConfig(Choice, 0, Colors, Players),
 	comConfig(Players, NewPlayers),
-	playing(BoardState, Colors, Players, PlayerActive).
-gameMode(BoardState, Choice, Colors, PLayers, PlayerActive):-
+	playing(BoardState, Colors, Players, PlayerActive, Pieces).
+gameMode(BoardState, Choice, Colors, PLayers, PlayerActive, Pieces):-
 	playersConfig(Choice, 0, Colors, Players),
-	playing(BoardState, Colors, Players, PlayerActive).
+	playing(BoardState, Colors, Players, PlayerActive, Pieces).
 
-menuStart(BoardState, Pieces, Colors, Players, PlayerActive):-
+menuStart(BoardState, Pieces, Colors, Players, PlayerActive, Pieces):-
 	printBanner(Choice),
 	gameModeMenu(Choice),
 	read(Choice),
@@ -76,9 +76,9 @@ menuStart(BoardState, Pieces, Colors, Players, PlayerActive):-
 	write('OK'),nl,
 	Choice > 0,
 	Choice < 5,
-	gameMode(BoardState, Choice, Colors, Players, PlayerActive).
-menuStart(BoardState, Pieces, Colors, Players, PlayerActive):-
-	menuStart(BoardState, Pieces, Colors, Players, PlayerActive).
+	gameMode(BoardState, Choice, Colors, Players, PlayerActive, Pieces).
+menuStart(BoardState, Pieces, Colors, Players, PlayerActive, Pieces):-
+	menuStart(BoardState, Pieces, Colors, Players, PlayerActive, Pieces).
 
 
 printActualPlayer(Players, PlayerActive):-
@@ -86,15 +86,19 @@ printActualPlayer(Players, PlayerActive):-
 	nl, write(Name), write(' is your turn!'), nl, nl.
 
 
-addPieceMenu(BoardState, Color, Row, Column):-
+addPieceMenu(BoardState, Color, Row, Column, Pieces):-
 	nl, write('ADD A PIECE TO BOARD'), nl,
 	write('Color (R, G, B or Y): '),
 	read(Color),
+	checkColorAvailability(Pieces, Color),
 	write('Row: '),
 	read(Row),
 	write('Column: '),
 	read(Column),
-	tryToAddPieceToBoard(BoardState, Color, Row, Column).
+	tryToAddPieceToBoard(BoardState, Color, Row, Column),
+	updateColorQuantity(Pieces, Color).
+addPieceMenu(BoardState, Color, Row, Column, Pieces):-
+	addPieceMenu(BoardState, Color, Row, Column, Pieces).
 
 
 movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
@@ -116,6 +120,8 @@ movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
 	write('Choose number of spaces to move: '),
 	read(NumbOfSpaces),
 	tryToMovePiece(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation).
+movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
+	movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  GAMEPLAY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -128,57 +134,6 @@ nextPlayer(BoardState, Colors, PLayers, PlayerActive):-
 nextPlayer(BoardState, Colors, PLayers, PlayerActive):-
 	PlayerActive is PlayerActive + 1,
 	playing(BoardState, Colors, Players, PlayerActive).
-
-checkColorAvailability(Pieces, Color):-
-	Color = 'R',
-	nth0(0, Pieces, AmountOfPieces),
-	AmountOfPieces > 0.
-checkColorAvailability(Pieces, Color):-
-	Color = 'G',
-	nth0(1, Pieces, AmountOfPieces),
-	AmountOfPieces > 0.
-checkColorAvailability(Pieces, Color):-
-	Color = 'B',
-	nth0(2, Pieces, AmountOfPieces),
-	AmountOfPieces > 0.
-checkColorAvailability(Pieces, Color):-
-	Color = 'Y',
-	nth0(3, Pieces, AmountOfPieces),
-	AmountOfPieces > 0.
-
-
-updateColorQuantity(Pieces, Color):-
-	Color = 'R',
-	nth0(0, Pieces, AmountOfPieces),
-	NewAmountOfPieces is AmountOfPieces -1,
-	nth0(1, Pieces, GreenPieces),
-	nth0(2, Pieces, BluePieces),
-	nth0(3, Pieces, YellowPieces),
-	Pieces([NewAmountOfPieces, GreenPieces, BluePieces, YellowPieces]).
-updateColorQuantity(Pieces, Color):-
-	Color = 'G',
-	nth0(1, Pieces, AmountOfPieces),
-	NewAmountOfPieces is AmountOfPieces -1,
-	nth0(0, Pieces, RedPieces),
-	nth0(2, Pieces, BluePieces),
-	nth0(3, Pieces, YellowPieces),
-	Pieces([RedPieces, NewAmountOfPieces, BluePieces, YellowPieces]).
-updateColorQuantity(Pieces, Color):-
-	Color = 'B',
-	nth0(2, Pieces, AmountOfPieces),
-	NewAmountOfPieces is AmountOfPieces -1,
-	nth0(1, Pieces, GreenPieces),
-	nth0(0, Pieces, RedPieces),
-	nth0(3, Pieces, YellowPieces),
-	Pieces([RedPieces, GreenPieces, NewAmountOfPieces, YellowPieces]).
-updateColorQuantity(Pieces, Color):-
-	Color = 'Y',
-	nth0(3, Pieces, AmountOfPieces),
-	NewAmountOfPieces is AmountOfPieces -1,
-	nth0(1, Pieces, GreenPieces),
-	nth0(2, Pieces, BluePieces),
-	nth0(0, Pieces, RedPieces),
-	Pieces([RedPieces, GreenPieces, BluePieces, NewAmountOfPieces]).
 
 
 initializeStateOfGame(BoardState, Pieces, Colors, Players):-
@@ -200,57 +155,5 @@ playing(BoardState, Colors, Players, PlayerActive):-
 
 start(BoardState, Pieces, Colors, Players):-
     initializeStateOfGame(BoardState, Pieces, Colors, Players),
-    menuStart(BoardState, Pieces, Colors, Players, PlayerActive),
-    printBoard(BoardState).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MENUS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-printBanner(Choice):-
-	nl,
-	write('======================================'), nl,
-	write('==             MEERKATS             =='), nl,
-	write('======================================'), nl,nl,nl.
-
-gameModeMenu(Choice):-
-	nl, nl,
-	write('1- Single Player'), nl,
-	write('-- Multiplayer --'), nl,
-	write('2- 2 Players'), nl,
-	write('3- 3 Players'), nl,
-	write('4- 4 Players'), nl,
-	write('Choice: ').
-
-gameMode(Choice, Colors,Players):-
-	Choice = 1,
-	playersConfig(Choice, 0, Colors, Players),
-	comConfig(_),
-	launchGame(Colors, Players).
-gameMode(Choice, Colors, PLayers):-
-	playersConfig(Choice, 0, Colors, Players),
-	launchGame(Colors, Players).
-
-menuStart(BoardState, Pieces, Colors, Players):-
-	printBanner(Choice),
-	gameModeMenu(Choice),
-	read(Choice),
-	skip_line,
-	write('OK'),nl,
-	Choice > 0,
-	Choice < 5,
-	gameMode(Choice, Colors, Players).
-menuStart(BoardState, Pieces, Colors, Players):-
-	menuStart(BoardState, Pieces, Colors, Players).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  GAMEPLAY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-initializeStateOfGame(BoardState, Pieces, Colors, Players):-
-	emptyBoard(BoardState),
-	colorsList(Colors),
-	initializePlayers(Players, PlayerActive),
-	initializePieces(Pieces).
-
-launchGame(_).
-
-start(BoardState, Pieces, Colors, Players):-
-    initializeStateOfGame(BoardState, Pieces, Colors, Players),
-    menuStart(BoardState, Pieces, Colors, Players),
+    menuStart(BoardState, Pieces, Colors, Players, PlayerActive, Pieces),
     printBoard(BoardState).
