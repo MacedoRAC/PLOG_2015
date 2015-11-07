@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Pla",
+				"PlayerNumb"
+			],
+			[
 				"Inde",
 				"Index"
 			],
@@ -68,18 +72,10 @@
 	"buffers":
 	[
 		{
-			"file": "Code/board.pl",
-			"settings":
-			{
-				"buffer_size": 3053,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "Code/gameplay.pl",
 			"settings":
 			{
-				"buffer_size": 2595,
+				"buffer_size": 2753,
 				"line_ending": "Windows"
 			}
 		},
@@ -87,7 +83,15 @@
 			"file": "Code/moves.pl",
 			"settings":
 			{
-				"buffer_size": 6023,
+				"buffer_size": 6818,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Code/utils.pl",
+			"settings":
+			{
+				"buffer_size": 626,
 				"line_ending": "Windows"
 			}
 		}
@@ -161,9 +165,13 @@
 	},
 	"expanded_folders":
 	[
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code"
 	],
 	"file_history":
 	[
+		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/board.pl",
+		"/C/Users/mario/Desktop/hosts",
+		"/C/Users/mario/.homestead/Homestead.yaml",
 		"/C/Users/mario/Copy/Diversos/Contas.txt",
 		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/utils.pl",
 		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/gameplay.pl",
@@ -176,13 +184,10 @@
 		"/C/Users/mario/AppData/Local/Temp/7zEE2C.tmp/index.html",
 		"/C/Users/mario/Desktop/admin",
 		"/C/Users/mario/Desktop/The Pirate Jogos - Project CARS/LEIA __ IMPORTANTE - SEED.txt",
-		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/board.pl",
 		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Code/moves.pl",
 		"/C/windows-version.txt",
 		"/C/Users/mario/Documents/André/Ludus/cristaltec_credentials.txt",
 		"/C/Users/mario/Documents/André/Ludus/ludus_passwords.txt",
-		"/C/Users/mario/.homestead/Homestead.yaml",
-		"/C/Users/mario/Desktop/hosts",
 		"/C/Users/mario/Google Drive/FEUP/PLOG/2015/Meerkats/Images/empty_board.png",
 		"/C/Windows/System32/drivers/etc/hosts",
 		"/C/Users/mario/Desktop/memsql-ops-4.1.7/README",
@@ -221,6 +226,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"printBoard",
 			"launc",
 			"ES-CN",
 			"checkInRo",
@@ -246,54 +252,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Code/board.pl",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3053,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								367,
-								367
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Prolog/support/Prolog.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 798.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "Code/gameplay.pl",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2595,
+						"buffer_size": 2753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23,
-								12
+								1458,
+								1458
 							]
 						],
 						"settings":
@@ -309,20 +285,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "Code/moves.pl",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6023,
+						"buffer_size": 6818,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4252,
-								4257
+								6217,
+								6217
 							]
 						],
 						"settings":
@@ -331,10 +307,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2142.0,
+						"translation.y": 2223.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Code/utils.pl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 626,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Prolog/support/Prolog.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
