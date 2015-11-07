@@ -208,24 +208,20 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 
 %===============MOVE PIECE=================
 
-move(BoardState, Color, RowSource, ColumnSource, Moves, Direction). %TO DO -> verifies if place is empty + places piece + deletes previous piece
-
-%Orientations: 1-top right, 2-right, 3-bottom right, 4-bottom left, 5-left, 6-top left
-/*movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
-	RowSource <= 4,
-	move(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).
-movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
-	RowSource > 4,
-	reverse(BoardState, ReversedBoard),
-	convertOrientation(Orientation, 0),
-	move(ReversedBoard, Color, RowSource, ColumnSource, Moves, Orientation),
-	reverse(ReversedBoard, BoardState).
-
-
-
-tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
-	movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).*/
+ %TO DO -> verifies if place is empty + places piece + deletes previous piece
+move(BoardState, Color, RowSource, ColumnSource, Moves, Direction):-
+	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).
 
 
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
+	NumbOfSpaces = 0.
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
+	convertOrientation(Orientation, Xinc, Yinc),
+	NewRowSource is RowSource + Yinc,
+	NewColumnSource is ColumnSource + Xinc,
+	tryToAddPieceToBoard(BoardState,Color,NewRowSource, NewColumnSource),
+	addPieceToBoard(BoardState,0, RowSource, ColumnSource, 0, [], FinalBoard),
+	NewNumbOfSpaces is NumbOfSpaces - 1,
+	tryToMovePiece(BoardState, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation).
+
 	
