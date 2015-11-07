@@ -207,21 +207,24 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 
 
 %===============MOVE PIECE=================
-
- %TO DO -> verifies if place is empty + places piece + deletes previous piece
-move(BoardState, Color, RowSource, ColumnSource, Moves, Direction):-
-	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).
-
-
-tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
-	NumbOfSpaces = 0.
-tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
+	
+move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
+	getPiece(BoardState, RowSource, ColumnSource, Color),
 	convertOrientation(Orientation, Xinc, Yinc),
+	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Xinc, Yinc),
+	OK is 0.
+move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
+	OK is 1.
+
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc):-
+	NumbOfSpaces = 0.
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc):-
+	write('Moves '), write(NumbOfSpaces),
 	NewRowSource is RowSource + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
 	tryToAddPieceToBoard(BoardState,Color,NewRowSource, NewColumnSource),
 	addPieceToBoard(BoardState,0, RowSource, ColumnSource, 0, [], FinalBoard),
 	NewNumbOfSpaces is NumbOfSpaces - 1,
-	tryToMovePiece(BoardState, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation).
+	tryToMovePiece(BoardState, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc).
 
-	
+%===============CHECK IF GAME ENDED=================

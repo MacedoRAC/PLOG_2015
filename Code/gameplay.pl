@@ -37,7 +37,120 @@ playersConfig(NoP, Index, Colors, Players).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMPUTER CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-comConfig(_).
+comConfig(Players, NewPlayers):-
+	NewColors = [],
+	randomColor(Colors, Color, NewColors),
+	append(Players, ['Computer', Color], NewPlayers).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MENUS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+printBanner(Choice):-
+	nl,
+	write('======================================'), nl,
+	write('==             MEERKATS             =='), nl,
+	write('======================================'), nl,nl,nl.
+
+gameModeMenu(Choice):-
+	nl, nl,
+	write('1- Single Player'), nl,
+	write('-- Multiplayer --'), nl,
+	write('2- 2 Players'), nl,
+	write('3- 3 Players'), nl,
+	write('4- 4 Players'), nl,
+	write('Choice: ').
+
+gameMode(BoardState, Choice, Colors,Players, PlayerActive):-
+	Choice = 1,
+	playersConfig(Choice, 0, Colors, Players),
+	comConfig(Players, NewPlayers),
+	playing(BoardState, Colors, Players, PlayerActive).
+gameMode(BoardState, Choice, Colors, PLayers, PlayerActive):-
+	playersConfig(Choice, 0, Colors, Players),
+	playing(BoardState, Colors, Players, PlayerActive).
+
+menuStart(BoardState, Pieces, Colors, Players, PlayerActive):-
+	printBanner(Choice),
+	gameModeMenu(Choice),
+	read(Choice),
+	skip_line,
+	write('OK'),nl,
+	Choice > 0,
+	Choice < 5,
+	gameMode(BoardState, Choice, Colors, Players, PlayerActive).
+menuStart(BoardState, Pieces, Colors, Players, PlayerActive):-
+	menuStart(BoardState, Pieces, Colors, Players, PlayerActive).
+
+
+printActualPlayer(Players, PlayerActive):-
+	getPlayerName(Players, 0, PlayerActive, Name),
+	nl, write(Name), write(' is your turn!'), nl, nl.
+
+
+addPieceMenu(BoardState, Color, Row, Column):-
+	nl, write('ADD A PIECE TO BOARD'), nl,
+	write('Color (R, G, B or Y): '),
+	read(Color),
+	write('Row: '),
+	read(Row),
+	write('Column: '),
+	read(Column),
+	tryToAddPieceToBoard(BoardState, Color, Row, Column).
+
+
+movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
+	nl, write('MOVE A PIECE'), nl,
+	write('Choose source piece:')
+	write('Row: '),
+	read(RowSource),
+	write('Column: '),
+	read(ColumnSource),
+	write('Choose Orientation:'), nl
+	write('1- Top Left'), nl,
+	write('2- Top Right'), nl,
+	write('3- Right'), nl,
+	write('4- Bottom Right'), nl,
+	write('5- Bottom Left'), nl,
+	write('6- Left'), nl,
+	write('Choice: '),
+	read(Orientation),
+	write('Choose number of spaces to move: '),
+	read(NumbOfSpaces),
+	tryToMovePiece(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  GAMEPLAY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+nextPlayer(BoardState, Colors, PLayers, PlayerActive):-
+	PlayerActive2 is PlayerActive + 1,
+	length(Players, Length),
+	PlayerActive2 = Length,
+	PlayerActive is 0,
+	playing(BoardState, Colors, Players, PlayerActive).
+nextPlayer(BoardState, Colors, PLayers, PlayerActive):-
+	PlayerActive is PlayerActive + 1,
+	playing(BoardState, Colors, Players, PlayerActive).
+
+
+initializeStateOfGame(BoardState, Pieces, Colors, Players):-
+	emptyBoard(BoardState),
+	colorsList(Colors),
+	initializePlayers(Players, PlayerActive),
+	initializePieces(Pieces).
+
+
+playing(BoardState, Colors, Players, PlayerActive):-
+	printActualPlayer(Players, PlayerActive),
+	printBoard(BoardState),
+	addPieceMenu(BoardState, Color, Row, Column),
+	printBoard(BoardState),
+	movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation),
+	printBoard(BoardState),
+	nextPlayer(BoardState, Colors, Players, PlayerActive).
+
+
+start(BoardState, Pieces, Colors, Players):-
+    initializeStateOfGame(BoardState, Pieces, Colors, Players),
+    menuStart(BoardState, Pieces, Colors, Players, PlayerActive),
+    printBoard(BoardState).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MENUS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
