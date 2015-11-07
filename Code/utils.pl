@@ -47,17 +47,9 @@ getPlayerName([H|T], Index, PlayerActive, Name):-
 
 %===============GET FUNCTIONS=================
 
-getColumn([H|T], Column, Color, Index):-
-	Index < Column,
-	Index2 is Index + 1,
-	getColumn(T, Column, Color, Index2).
-getColumn([H|T], Column, Color, Index):-
-	Index = Column,
-	Color is H.
-
 getRow([H|T], Row, Column, Color, Index):-
 	Index = Row,
-	getColumn(H, Column, Color, 0).
+	nth0(Column,H,Color).
 getRow([H|T], Row, Column, Color, Index):-
 	Index < Row,
 	Index2 is Index + 1,
