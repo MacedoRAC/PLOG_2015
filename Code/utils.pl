@@ -13,25 +13,33 @@ printlist([X|List]) :-
 % se Orientation == 6 (left) => Z = constante && X -= 1 && Y += 1
 
 
-%top left -> bottom left
-convertOrientation(Orientation, Done):-
-	Done = 0
-	Orientation = 6,
-	convertOrientation(4, 1).
-%top right -> bottom right
-convertOrientation(Orientation, Done):-
-	Done = 0
+convertOrientation(Orientation, Xinc, Yinc, Zinc):-
 	Orientation = 1,
-	convertOrientation(3, 1).
-%bottom right-> top right
-convertOrientation(Orientation, Done):-
-	Done = 0
-	Orientation = 3,
-	convertOrientation(1, 1).
-%bottom left -> top left
-convertOrientation(Orientation, Done):-
-	Done = 0
+	Xinc is 0,
+	Yinc is 1,
+	Zinc is -1.
+convertOrientation(Orientation, Xinc, Yinc, Zinc):-
 	Orientation = 4,
-	convertOrientation(6, 1).
-convertOrientation(Orientation, Done):-
-	Done = 1.
+	Xinc is 0,
+	Yinc is -1,
+	Zinc is 1.
+convertOrientation(Orientation, Xinc, Yinc, Zinc):-
+	Orientation = 2,
+	Xinc is 1,
+	Yinc is 0,
+	Zinc is -1.
+convertOrientation(Orientation, Xinc, Yinc, Zinc):-
+	Orientation = 5,
+	Xinc is -1,
+	Yinc is 0,
+	Zinc is 1.
+convertOrientation(Orientation, Xinc, Yinc, Zinc):-
+	Orientation = 3,
+	Xinc is 1,
+	Yinc is -1,
+	Zinc is 0.
+convertOrientation(Orientation, Xinc, Yinc, Zinc):-
+	Orientation = 6,
+	Xinc is 0,
+	Yinc is 1,
+	Zinc is -1.
