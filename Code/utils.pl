@@ -5,6 +5,14 @@ printlist([X|List]) :-
 	write(X),nl,
 	printlist(List).
 
+% se Orientation == 1 (top-left) => X = constante && Y += 1 && Z -= 1
+% se Orientation == 4 (botom-right) => X = constante && Y -= 1 && Z += 1
+% se Orientation == 2 (top-right) => Y = constante && X += 1 && Z -= 1
+% se Orientation == 5 (bottom-left) => Y = constante && X -= 1 && Z += 1
+% se Orientation == 3 (right) => Z = constante && X += 1 && Y -= 1
+% se Orientation == 6 (left) => Z = constante && X -= 1 && Y += 1
+
+
 %top left -> bottom left
 convertOrientation(Orientation, Done):-
 	Done = 0

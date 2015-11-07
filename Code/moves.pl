@@ -211,7 +211,7 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 move(BoardState, Color, RowSource, ColumnSource, Moves, Direction). %TO DO -> verifies if place is empty + places piece + deletes previous piece
 
 %Orientations: 1-top right, 2-right, 3-bottom right, 4-bottom left, 5-left, 6-top left
-movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
+/*movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
 	RowSource <= 4,
 	move(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).
 movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
@@ -224,4 +224,8 @@ movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
 
 
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation):-
-	movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).
+	movePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation).*/
+
+
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
+	
