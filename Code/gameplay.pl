@@ -129,6 +129,57 @@ nextPlayer(BoardState, Colors, PLayers, PlayerActive):-
 	PlayerActive is PlayerActive + 1,
 	playing(BoardState, Colors, Players, PlayerActive).
 
+checkColorAvailability(Pieces, Color):-
+	Color = 'R',
+	nth0(0, Pieces, AmountOfPieces),
+	AmountOfPieces > 0.
+checkColorAvailability(Pieces, Color):-
+	Color = 'G',
+	nth0(1, Pieces, AmountOfPieces),
+	AmountOfPieces > 0.
+checkColorAvailability(Pieces, Color):-
+	Color = 'B',
+	nth0(2, Pieces, AmountOfPieces),
+	AmountOfPieces > 0.
+checkColorAvailability(Pieces, Color):-
+	Color = 'Y',
+	nth0(3, Pieces, AmountOfPieces),
+	AmountOfPieces > 0.
+
+
+updateColorQuantity(Pieces, Color):-
+	Color = 'R',
+	nth0(0, Pieces, AmountOfPieces),
+	NewAmountOfPieces is AmountOfPieces -1,
+	nth0(1, Pieces, GreenPieces),
+	nth0(2, Pieces, BluePieces),
+	nth0(3, Pieces, YellowPieces),
+	Pieces([NewAmountOfPieces, GreenPieces, BluePieces, YellowPieces]).
+updateColorQuantity(Pieces, Color):-
+	Color = 'G',
+	nth0(1, Pieces, AmountOfPieces),
+	NewAmountOfPieces is AmountOfPieces -1,
+	nth0(0, Pieces, RedPieces),
+	nth0(2, Pieces, BluePieces),
+	nth0(3, Pieces, YellowPieces),
+	Pieces([RedPieces, NewAmountOfPieces, BluePieces, YellowPieces]).
+updateColorQuantity(Pieces, Color):-
+	Color = 'B',
+	nth0(2, Pieces, AmountOfPieces),
+	NewAmountOfPieces is AmountOfPieces -1,
+	nth0(1, Pieces, GreenPieces),
+	nth0(0, Pieces, RedPieces),
+	nth0(3, Pieces, YellowPieces),
+	Pieces([RedPieces, GreenPieces, NewAmountOfPieces, YellowPieces]).
+updateColorQuantity(Pieces, Color):-
+	Color = 'Y',
+	nth0(3, Pieces, AmountOfPieces),
+	NewAmountOfPieces is AmountOfPieces -1,
+	nth0(1, Pieces, GreenPieces),
+	nth0(2, Pieces, BluePieces),
+	nth0(0, Pieces, RedPieces),
+	Pieces([RedPieces, GreenPieces, BluePieces, NewAmountOfPieces]).
+
 
 initializeStateOfGame(BoardState, Pieces, Colors, Players):-
 	emptyBoard(BoardState),
