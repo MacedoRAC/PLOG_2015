@@ -28,7 +28,7 @@ playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
 	PlayerNumb is Index + 1,
 	write('Player '), write(PlayerNumb), write(' nickname: '),
 	read(Name),
-	NewColors is [],
+	NewColors = [],
 	randomColor(Colors, Color, NewColors),
 	append(Players, [Name, Color], NewPlayers),
 	Index2 is Index + 1,
