@@ -164,8 +164,7 @@ setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
 	setCell(Color, Column, Index2, T, NewRow2,FinalRow).
 
 addPieceToBoard([], Color, Row, Column, Index, NewBoard, FinalBoard):-
-	append([], NewBoard, FinalBoard),
-	printlist(FinalBoard).
+	append([], NewBoard, FinalBoard).
 addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 	Row = Index,
 	createEmptyList(NewRow),
@@ -209,36 +208,30 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 	
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
 	NumbOfSpaces =< 0,
-	printlist(BoardState),
+	printBoard(BoardState),
 	append([], Board, BoardState).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
 	RowSource = 4, 
 	Orientation = 1,
-	NewRowSourceTemp is 8 - RowSource,
-	NewRowSource is NewRowSourceTemp + 1,
+	NewRowSource is RowSource + 1,
 	NewColumnSource is ColumnSource - 1,
 	reverse(BoardState, ReversedBoardState),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
-	printlist(FinalBoard2Reversed), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
-	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	Row is 8 - NewRowSource,
 	tryToMovePiece(FinalBoard2Reversed, Color, Row, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
 	RowSource = 4,
 	Orientation = 2,
-	NewRowSourceTemp is 8 - RowSource,
-	NewRowSource is NewRowSourceTemp + 1,
+	NewRowSource is RowSource + 1,
 	NewColumnSource is ColumnSource + 0,
 	reverse(BoardState, ReversedBoardState),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
-	printlist(FinalBoard2Reversed), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
-	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	Row is 8 - NewRowSource,
 	tryToMovePiece(FinalBoard2Reversed, Color, Row, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
@@ -247,18 +240,11 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewRowSourceTemp is 8 - RowSource,
 	NewRowSource is NewRowSourceTemp + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
-	printlist(BoardState), nl,
 	reverse(BoardState, ReversedBoardState),
-	printlist(ReversedBoardState), nl,
-	write('ROW: '), write(NewRowSource), write('; COL: '), write(NewColumnSource), nl,
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
-	printlist(FinalBoard), nl,
 	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
-	printlist(FinalBoard2), nl,
 	reverse(FinalBoard2, FinalBoard2Reversed),
-	printlist(FinalBoard2Reversed), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
-	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	Row is 8 - NewRowSource,
 	tryToMovePiece(FinalBoard2Reversed, Color, Row, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
@@ -268,13 +254,11 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewColumnSource is ColumnSource + Xinc,
 	addPieceToBoard(BoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
-	printlist(FinalBoard2), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
-	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
-	write('MOVE: '), write(Moves), nl,
+	printBoard(BoardState),
 	getPiece(BoardState, RowSource, ColumnSource, Color),
 	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation, Board).
 
