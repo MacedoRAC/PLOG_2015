@@ -118,6 +118,20 @@ checkColorAvailability(Pieces, Color):-
 	AmountOfPieces > 0.
 
 
+converColorToNum(Color, ColorNum):-
+	Color = 'R',
+	ColorNum is 1.
+converColorToNum(Color, ColorNum):-
+	Color = 'G',
+	ColorNum is 2.
+converColorToNum(Color, ColorNum):-
+	Color = 'B',
+	ColorNum is 3.
+converColorToNum(Color, ColorNum):-
+	Color = 'Y',
+	ColorNum is 4.
+
+
 updateColorQuantity(Pieces, Color):-
 	Color = 'R',
 	nth0(0, Pieces, AmountOfPieces),

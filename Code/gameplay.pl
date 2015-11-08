@@ -9,6 +9,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLAYERS CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+deleteColor([], Position, Index, NewColors).
 deleteColor([H|T], Position, Index, NewColors):-
 	Index = Position,
 	Index2 is Index + 1,
@@ -17,7 +18,6 @@ deleteColor([H|T], Position, Index, NewColors):-
 	append(NewColors, [H], NewColors2),
 	Index2 is Index + 1,
 	deleteColor(T, Position, Index2, NewColors2).
-deleteColor([], Position, Index, NewColors).
 
 randomColor(Colors, Color, NewColors):-
 	length(Colors, Length),
@@ -35,7 +35,8 @@ playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
 	append(Players, [[Name, Color]], NewPlayers),
 	Index2 is Index + 1,
 	playersConfig(NoP, Index2, NewColors, NewPlayers).
-playersConfig(NoP, Index, Colors, Players).
+playersConfig(NoP, Index, Colors, Players):-
+	printlist(Players).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMPUTER CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,7 +68,7 @@ gameMode(BoardState, Choice, Colors, Players, PlayerActive, Pieces):-
 	comConfig(Players, NewPlayers),
 	playing(BoardState, Colors, Players, PlayerActive, Pieces).
 gameMode(BoardState, Choice, Colors, PLayers, PlayerActive, Pieces):-
-	playersConfig(Choice, 0, Colors, Players),
+	%playersConfig(Choice, 0, Colors, Players),
 	playing(BoardState, Colors, Players, PlayerActive, Pieces).
 
 menuStart(BoardState, Pieces, Colors, Players, PlayerActive, Pieces):-
@@ -97,7 +98,8 @@ addPieceMenu(BoardState, Color, Row, Column, Pieces):-
 	read(Row),
 	write('Column: '),
 	read(Column),
-	tryToAddPieceToBoard(BoardState, Color, Row, Column),
+	converColorToNum(Color, ColorNum),
+	tryToAddPieceToBoard(BoardState, ColorNum, Row, Column),
 	updateColorQuantity(Pieces, Color).
 addPieceMenu(BoardState, Color, Row, Column, Pieces):-
 	addPieceMenu(BoardState, Color, Row, Column, Pieces).
@@ -148,7 +150,7 @@ initializeStateOfGame(BoardState, Pieces, Colors, Players):-
 playing(BoardState, Colors, Players, PlayerActive, Pieces):-
 	printActualPlayer(Players, PlayerActive),
 	printBoard(BoardState),
-	addPieceMenu(BoardState, Color, Row, Column),
+	addPieceMenu(BoardState, Color, Row, Column, Pieces),
 	printBoard(BoardState),
 	movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation),
 	printBoard(BoardState),
