@@ -76,7 +76,7 @@ convertOrientation(RowSrc, Orientation, Xinc, Yinc):-
 	RowSrc >= 4,
 	Orientation = 6,
 	Xinc is -1,
-	Yinc is 1.
+	Yinc is 0.
 
 
 getPlayerName([H|T], Index, PlayerActive, Name):-

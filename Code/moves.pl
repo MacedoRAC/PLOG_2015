@@ -152,7 +152,7 @@ checkAdjacentCells(Board, Row, Column):- %most comon case
 	checkMiddleCell(Board, Row, Column).
 
 setCell(Color, Column, Index, [], NewRow,FinalRow):-
-	FinalRow = NewRow. 
+	append([], NewRow, FinalRow). 
 setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
 	Column = Index,
 	append(NewRow, [Color], NewRow2),
@@ -164,18 +164,19 @@ setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
 	setCell(Color, Column, Index2, T, NewRow2,FinalRow).
 
 addPieceToBoard([], Color, Row, Column, Index, NewBoard, FinalBoard):-
-	append([], NewBoard, FinalBoard).
+	append([], NewBoard, FinalBoard),
+	printlist(FinalBoard).
 addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 	Row = Index,
 	createEmptyList(NewRow),
 	setCell(Color, Column, 0, H, NewRow,FinalRow),
 	append(NewBoard, [FinalRow], NewBoard2),
 	Index2 is Index + 1,
-	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2, FinalBoard).
-addPieceToBoard([H|T], Color, Row, _, Index, NewBoard, FinalBoard):-
+	addPieceToBoard(T, Color, Row, Column, Index2, NewBoard2, FinalBoard).
+addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 	append(NewBoard, [H], NewBoard2),
 	Index2 is Index + 1,
-	addPieceToBoard(T, Color, Row, _, Index2, NewBoard2, FinalBoard).
+	addPieceToBoard(T, Color, Row, Column, Index2, NewBoard2, FinalBoard).
 
 %===============CHECK IF PIECE PLACEMENT IS VALID=================
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
@@ -201,27 +202,6 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 	RevRow is 8 - Row,
 	reverse(BoardState, ReversedBoard),
 	checkAdjacentCells(ReversedBoard ,RevRow, Column),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
-
-
-tryToAddPieceToBoardOnMove(BoardState, Color, Row, Column):-
-	Row = 4, !,
-	Column = 8, !,
-	checkCorner(BoardState, 3),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
-tryToAddPieceToBoardOnMove(BoardState, Color, Row, Column):-
-	Row = 4, !,
-	Column = 0, !,
-	checkCorner(BoardState, 6),
-	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
-tryToAddPieceToBoardOnMove(BoardState, Color, Row, Column):-
-	Row = 4, !,
-	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
-tryToAddPieceToBoardOnMove(BoardState, Color, Row, Column):-
-	Row < 4, !,
-	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
-tryToAddPieceToBoardOnMove(BoardState,Color, Row, Column):-
-	Row > 4, !,
 	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 
 
@@ -267,10 +247,14 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewRowSourceTemp is 8 - RowSource,
 	NewRowSource is NewRowSourceTemp + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
-	write(NewRowSource), nl , write(NewColumnSource), nl,
+	printlist(BoardState), nl,
 	reverse(BoardState, ReversedBoardState),
+	printlist(ReversedBoardState), nl,
+	write('ROW: '), write(NewRowSource), write('; COL: '), write(NewColumnSource), nl,
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
+	printlist(FinalBoard), nl,
 	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
+	printlist(FinalBoard2), nl,
 	reverse(FinalBoard2, FinalBoard2Reversed),
 	printlist(FinalBoard2Reversed), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
