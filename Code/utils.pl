@@ -90,7 +90,7 @@ updateColorQuantity(Pieces, Color):-
 	nth0(1, Pieces, GreenPieces),
 	nth0(2, Pieces, BluePieces),
 	nth0(3, Pieces, YellowPieces),
-	Pieces([NewAmountOfPieces, GreenPieces, BluePieces, YellowPieces]).
+	append([], [NewAmountOfPieces, GreenPieces, BluePieces, YellowPieces], Pieces).
 updateColorQuantity(Pieces, Color):-
 	Color = 'G',
 	nth0(1, Pieces, AmountOfPieces),
@@ -98,7 +98,7 @@ updateColorQuantity(Pieces, Color):-
 	nth0(0, Pieces, RedPieces),
 	nth0(2, Pieces, BluePieces),
 	nth0(3, Pieces, YellowPieces),
-	Pieces([RedPieces, NewAmountOfPieces, BluePieces, YellowPieces]).
+	append([], [RedPieces, NewAmountOfPieces, BluePieces, YellowPieces], Pieces).
 updateColorQuantity(Pieces, Color):-
 	Color = 'B',
 	nth0(2, Pieces, AmountOfPieces),
@@ -106,7 +106,7 @@ updateColorQuantity(Pieces, Color):-
 	nth0(1, Pieces, GreenPieces),
 	nth0(0, Pieces, RedPieces),
 	nth0(3, Pieces, YellowPieces),
-	Pieces([RedPieces, GreenPieces, NewAmountOfPieces, YellowPieces]).
+	append([], [RedPieces, GreenPieces, NewAmountOfPieces, YellowPieces], Pieces).
 updateColorQuantity(Pieces, Color):-
 	Color = 'Y',
 	nth0(3, Pieces, AmountOfPieces),
@@ -114,4 +114,4 @@ updateColorQuantity(Pieces, Color):-
 	nth0(1, Pieces, GreenPieces),
 	nth0(2, Pieces, BluePieces),
 	nth0(0, Pieces, RedPieces),
-	Pieces([RedPieces, GreenPieces, BluePieces, NewAmountOfPieces]).
+	append([], [RedPieces, GreenPieces, BluePieces, NewAmountOfPieces], Pieces).

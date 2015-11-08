@@ -103,12 +103,12 @@ addPieceMenu(BoardState, Color, Row, Column, Pieces):-
 
 movePieceMenu(BoardState, RowSource, ColumnSource, NumbOfSpaces, Orientation):-
 	nl, write('MOVE A PIECE'), nl,
-	write('Choose source piece:')
+	write('Choose source piece:'),
 	write('Row: '),
 	read(RowSource),
 	write('Column: '),
 	read(ColumnSource),
-	write('Choose Orientation:'), nl
+	write('Choose Orientation:'), nl,
 	write('1- Top Left'), nl,
 	write('2- Top Right'), nl,
 	write('3- Right'), nl,
