@@ -29,7 +29,7 @@ playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
 	PlayerNumb is Index + 1,
 	write('Player '), write(PlayerNumb), write(' nickname: '),
 	read(Name),
-	NewColors = [],
+	createEmptyList(NewColors),
 	randomColor(Colors, Color, NewColors),
 	append(Players, [Name, Color], NewPlayers),
 	Index2 is Index + 1,
@@ -39,7 +39,7 @@ playersConfig(NoP, Index, Colors, Players).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMPUTER CONFIG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 comConfig(Players, NewPlayers):-
-	NewColors = [],
+	createEmptyList(NewColors),
 	randomColor(Colors, Color, NewColors),
 	append(Players, ['Computer', Color], NewPlayers).
 

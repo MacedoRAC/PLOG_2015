@@ -208,7 +208,6 @@ tryToAddPieceToBoard(BoardState,Color, Row, Column):-
 	
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
 	NumbOfSpaces =< 0,
-	printBoard(BoardState),
 	append([], Board, BoardState).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
 	RowSource = 4, 
@@ -216,6 +215,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewRowSource is RowSource + 1,
 	NewColumnSource is ColumnSource - 1,
 	reverse(BoardState, ReversedBoardState),
+	emptyCell(ReversedBoardState, NewRowSource, NewColumnSource, Color),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
@@ -227,6 +227,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	Orientation = 2,
 	NewRowSource is RowSource + 1,
 	reverse(BoardState, ReversedBoardState),
+	emptyCell(ReversedBoardState, NewRowSource, ColumnSource, Color),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, ColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
@@ -240,6 +241,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewRowSource is NewRowSourceTemp + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
 	reverse(BoardState, ReversedBoardState),
+	emptyCell(ReversedBoardState, NewRowSource, ColumnSource, Color),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
@@ -251,13 +253,13 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	convertOrientation(RowSource, Orientation, Xinc, Yinc),
 	NewRowSource is RowSource + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
+	emptyCell(BoardState, NewRowSource, NewColumnSource, Color),
 	addPieceToBoard(BoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	NewNumbOfSpaces is NumbOfSpaces - 1,
 	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
-	printBoard(BoardState),
 	getPiece(BoardState, RowSource, ColumnSource, Color),
 	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation, Board).
 
