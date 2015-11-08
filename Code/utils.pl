@@ -5,10 +5,6 @@ printlist([X|List]) :-
 	write(X),nl,
 	printlist(List).
 
-emptyCell(Board, Row, Collum, Color):-
-	getPiece(Board, Row, Collumn, Color),
-	not(Color = 0).
-
 % se Orientation == 1 (top-left) => X = constante && Y -= 1
 % se Orientation == 2 (top-right) => X += 1 && Y -= 1
 % se Orientation == 3 (right) => X += 1 && Y += 0
@@ -99,7 +95,9 @@ getRow([H|T], Row, Column, Color, Index):-
 getPiece(Board, Row, Column, Color):-
 	getRow(Board, Row, Column, Color, 0).
 
-
+emptyCell(Board, Row, Collum, Color):-
+	getPiece(Board, Row, Collumn, Color),
+	Color = 0.
 
 %=================Pieces' related==============
 checkColorAvailability(Pieces, Color):-

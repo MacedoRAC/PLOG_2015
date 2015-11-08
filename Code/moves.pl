@@ -41,7 +41,7 @@ isCorner(R, C, CornerNumber):-
 	R = 0,
 	C = 4,
 	CornerNumber is 2.
-isCorner(_, _, CornerNumber):-
+isCorner(R, C, CornerNumber):-
 	fail.
 
 checkCorner(Board, 1):-
@@ -179,24 +179,29 @@ addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 
 %===============CHECK IF PIECE PLACEMENT IS VALID=================
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
+	emptyCell(BoardState, Row, Column, C),
 	Row = 4, !,
 	Column = 8, !,
 	checkCorner(BoardState, 3),
 	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
+	emptyCell(BoardState, Row, Column, C),
 	Row = 4, !,
 	Column = 0, !,
 	checkCorner(BoardState, 6),
 	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
+	emptyCell(BoardState, Row, Column, C),
 	Row = 4, !,
 	checkMiddleCell(BoardState ,Row, Column),
 	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState, Color, Row, Column):-
+	emptyCell(BoardState, Row, Column, C),
 	Row < 4, !,
 	checkAdjacentCells(BoardState ,Row, Column),
 	addPieceToBoard(BoardState, Color, Row, Column, 0, [], FinalBoard).
 tryToAddPieceToBoard(BoardState,Color, Row, Column):-
+	emptyCell(BoardState, Row, Column, C),
 	Row > 4, !,
 	RevRow is 8 - Row,
 	reverse(BoardState, ReversedBoard),
@@ -215,7 +220,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewRowSource is RowSource + 1,
 	NewColumnSource is ColumnSource - 1,
 	reverse(BoardState, ReversedBoardState),
-	emptyCell(ReversedBoardState, NewRowSource, NewColumnSource, Color),
+	emptyCell(ReversedBoardState, NewRowSource, NewColumnSource, C),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
@@ -227,7 +232,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	Orientation = 2,
 	NewRowSource is RowSource + 1,
 	reverse(BoardState, ReversedBoardState),
-	emptyCell(ReversedBoardState, NewRowSource, ColumnSource, Color),
+	emptyCell(ReversedBoardState, NewRowSource, ColumnSource, C),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, ColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
@@ -241,7 +246,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewRowSource is NewRowSourceTemp + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
 	reverse(BoardState, ReversedBoardState),
-	emptyCell(ReversedBoardState, NewRowSource, ColumnSource, Color),
+	emptyCell(ReversedBoardState, NewRowSource, NewColumnSource, C),
 	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
 	reverse(FinalBoard2, FinalBoard2Reversed),
@@ -253,7 +258,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	convertOrientation(RowSource, Orientation, Xinc, Yinc),
 	NewRowSource is RowSource + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
-	emptyCell(BoardState, NewRowSource, NewColumnSource, Color),
+	emptyCell(BoardState, NewRowSource, NewColumnSource, C),
 	addPieceToBoard(BoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	NewNumbOfSpaces is NumbOfSpaces - 1,
