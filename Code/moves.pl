@@ -1,5 +1,3 @@
-:- [utils].
-
 :- use_module(library(lists)).
 :- use_module(library(clpfd)).
 
@@ -166,8 +164,7 @@ setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
 	setCell(Color, Column, Index2, T, NewRow2,FinalRow).
 
 addPieceToBoard([], Color, Row, Column, Index, NewBoard, FinalBoard):-
-	FinalBoard = NewBoard,
-	printlist(NewBoard),nl ,nl ,nl.
+	append([], NewBoard, FinalBoard).
 addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 	Row = Index,
 	createEmptyList(NewRow),
@@ -231,8 +228,8 @@ tryToAddPieceToBoardOnMove(BoardState,Color, Row, Column):-
 %===============MOVE PIECE=================
 	
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
-	NumbOfSpaces = 0,
-	BoardState = Board.
+	NumbOfSpaces =< 0,
+	append([], Board, BoardState).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
 	NewRowSource is RowSource + Xinc,
 	NewColumnSource is ColumnSource + Yinc,
@@ -242,13 +239,9 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Y
 	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc, Board).
 
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
-	write('1'), nl, printlist(BoardState),
 	getPiece(BoardState, RowSource, ColumnSource, Color),
-	convertOrientation(Orientation, Xinc, Yinc),
+	convertOrientation(Orientation, Xinc, Yinc), !,
 	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Xinc, Yinc, Board),
-	write('2'), nl,  printlist(BoardState),
-	OK is 0.	
-move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
-	OK is 1.
+	write('2').
 
 %===============CHECK IF GAME ENDED=================

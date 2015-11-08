@@ -1,6 +1,7 @@
+
+:- [utils].
 :- [board].
 :- [moves].
-:- [utils].
 
 :- use_module(library(lists)).
 :- use_module(library(clpfd)).
