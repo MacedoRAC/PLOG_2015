@@ -229,13 +229,56 @@ tryToAddPieceToBoardOnMove(BoardState,Color, Row, Column):-
 	
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
 	NumbOfSpaces =< 0,
+	printlist(BoardState),
 	append([], Board, BoardState).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
+	RowSource = 4, 
+	Orientation = 1,
+	NewRowSourceTemp is 8 - RowSource,
+	NewRowSource is ColumnSource + Yinc,
+	NewColumnSource is ColumnSource + Xinc,
+	reverse(BoardState, ReversedBoardState),
+	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
+	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
+	reverse(FinalBoard2, FinalBoard2Reversed),
+	printlist(FinalBoard2Reversed), nl,
+	NewNumbOfSpaces is NumbOfSpaces - 1,
+	write('MOVE: '), write(NewNumbOfSpaces), nl,
+	tryToMovePiece(FinalBoard2Reversed, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc, Board).
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
+	RowSource = 4,
+	Orientation = 2,
+	NewRowSourceTemp is 8 - RowSource,
+	NewRowSource is ColumnSource + Yinc,
+	NewColumnSource is ColumnSource + Xinc,
+	reverse(BoardState, ReversedBoardState),
+	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
+	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
+	reverse(FinalBoard2, FinalBoard2Reversed),
+	printlist(FinalBoard2Reversed), nl,
+	NewNumbOfSpaces is NumbOfSpaces - 1,
+	write('MOVE: '), write(NewNumbOfSpaces), nl,
+	tryToMovePiece(FinalBoard2Reversed, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc, Board).
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
+	RowSource < 4,
+	NewRowSourceTemp is 8 - RowSource,
+	NewRowSource is ColumnSource + Yinc,
+	NewColumnSource is ColumnSource + Xinc,
+	reverse(BoardState, ReversedBoardState),
+	addPieceToBoard(ReversedBoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
+	addPieceToBoard(FinalBoard,0, NewRowSourceTemp, ColumnSource, 0, [], FinalBoard2),
+	reverse(FinalBoard2, FinalBoard2Reversed),
+	printlist(FinalBoard2Reversed), nl,
+	NewNumbOfSpaces is NumbOfSpaces - 1,
+	write('MOVE: '), write(NewNumbOfSpaces), nl,
+	tryToMovePiece(FinalBoard2Reversed, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc, Board).
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
+	RowSource =< 4,
 	NewRowSource is RowSource + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
 	addPieceToBoard(BoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
-	nl, printlist(FinalBoard), nl,
 	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
+	printlist(FinalBoard2), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
 	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc, Board).
