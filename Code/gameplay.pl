@@ -14,9 +14,10 @@ deleteColor([H|T], Position, Index, NewColors):-
 	Index2 is Index + 1,
 	deleteColor(T, Position, Index2, NewColors).
 deleteColor([H|T], Position, Index, NewColors):-
-	append(NewColors, H, NewColors2),
+	append(NewColors, [H], NewColors2),
 	Index2 is Index + 1,
 	deleteColor(T, Position, Index2, NewColors2).
+deleteColor([], Position, Index, NewColors).
 
 randomColor(Colors, Color, NewColors):-
 	length(Colors, Length),
@@ -25,13 +26,13 @@ randomColor(Colors, Color, NewColors):-
 	deleteColor(Colors, Index, 0, NewColors).
 
 playersConfig(NoP, Index, Colors, Players):- % NoP - number of playersConfig
-	Index =< NoP,
+	Index < NoP,
 	PlayerNumb is Index + 1,
 	write('Player '), write(PlayerNumb), write(' nickname: '),
 	read(Name),
 	createEmptyList(NewColors),
 	randomColor(Colors, Color, NewColors),
-	append(Players, [Name, Color], NewPlayers),
+	append(Players, [[Name, Color]], NewPlayers),
 	Index2 is Index + 1,
 	playersConfig(NoP, Index2, NewColors, NewPlayers).
 playersConfig(NoP, Index, Colors, Players).
@@ -144,7 +145,7 @@ initializeStateOfGame(BoardState, Pieces, Colors, Players):-
 	initializePieces(Pieces).
 
 
-playing(BoardState, Colors, Players, PlayerActive):-
+playing(BoardState, Colors, Players, PlayerActive, Pieces):-
 	printActualPlayer(Players, PlayerActive),
 	printBoard(BoardState),
 	addPieceMenu(BoardState, Color, Row, Column),
