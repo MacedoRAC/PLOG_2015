@@ -231,17 +231,19 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Y
 	NumbOfSpaces =< 0,
 	append([], Board, BoardState).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Xinc, Yinc, Board):-
-	NewRowSource is RowSource + Xinc,
-	NewColumnSource is ColumnSource + Yinc,
+	NewRowSource is RowSource + Yinc,
+	NewColumnSource is ColumnSource + Xinc,
 	addPieceToBoard(BoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
-	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard),
+	nl, printlist(FinalBoard), nl,
+	addPieceToBoard(FinalBoard,0, RowSource, ColumnSource, 0, [], FinalBoard2),
 	NewNumbOfSpaces is NumbOfSpaces - 1,
+	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Xinc, Yinc, Board).
 
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
+	write('MOVE: '), write(Moves), nl,
 	getPiece(BoardState, RowSource, ColumnSource, Color),
 	convertOrientation(Orientation, Xinc, Yinc), !,
-	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Xinc, Yinc, Board),
-	write('2').
+	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Xinc, Yinc, Board).
 
 %===============CHECK IF GAME ENDED=================
