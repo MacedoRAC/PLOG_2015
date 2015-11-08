@@ -260,6 +260,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	tryToMovePiece(FinalBoard2Reversed, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
+	RowSource < 4,
 	convertOrientation(RowSource, Orientation, Xinc, Yinc),
 	NewRowSourceTemp is 8 - RowSource,
 	NewRowSource is ColumnSource + Yinc,
@@ -272,8 +273,9 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	NewNumbOfSpaces is NumbOfSpaces - 1,
 	write('MOVE: '), write(NewNumbOfSpaces), nl,
 	tryToMovePiece(FinalBoard2Reversed, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
-/*tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
+tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orientation, Board):-
 	RowSource >= 4,
+	convertOrientation(RowSource, Orientation, Xinc, Yinc),
 	NewRowSource is RowSource + Yinc,
 	NewColumnSource is ColumnSource + Xinc,
 	addPieceToBoard(BoardState, Color, NewRowSource, NewColumnSource, 0, [], FinalBoard),
@@ -281,7 +283,7 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	printlist(FinalBoard2), nl,
 	NewNumbOfSpaces is NumbOfSpaces - 1,
 	write('MOVE: '), write(NewNumbOfSpaces), nl,
-	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).*/
+	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
 	write('MOVE: '), write(Moves), nl,
