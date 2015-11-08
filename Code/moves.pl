@@ -292,7 +292,6 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
 	write('MOVE: '), write(Moves), nl,
 	getPiece(BoardState, RowSource, ColumnSource, Color),
-	convertOrientation(Orientation, Xinc, Yinc), !,
 	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation, Board).
 
 %===============CHECK IF GAME ENDED=================
