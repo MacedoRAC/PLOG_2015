@@ -164,7 +164,8 @@ setCell(Color, Column, Index, [H|T], NewRow,FinalRow):-
 	setCell(Color, Column, Index2, T, NewRow2,FinalRow).
 
 addPieceToBoard([], Color, Row, Column, Index, NewBoard, FinalBoard):-
-	append([], NewBoard, FinalBoard).
+	append([], NewBoard, FinalBoard),
+	printBoard(FinalBoard).
 addPieceToBoard([H|T], Color, Row, Column, Index, NewBoard, FinalBoard):-
 	Row = Index,
 	createEmptyList(NewRow),
@@ -265,7 +266,9 @@ tryToMovePiece(BoardState, Color, RowSource, ColumnSource, NumbOfSpaces, Orienta
 	tryToMovePiece(FinalBoard2, Color, NewRowSource, NewColumnSource, NewNumbOfSpaces, Orientation, Board).
 
 move(BoardState, RowSource, ColumnSource, Moves, Orientation, OK):-
+	printBoard(BoardState),
 	getPiece(BoardState, RowSource, ColumnSource, Color),
-	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation, Board).
+	tryToMovePiece(BoardState, Color, RowSource, ColumnSource, Moves, Orientation, Board),
+	printBoard(Board).
 
 %===============CHECK IF GAME ENDED=================
