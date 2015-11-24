@@ -1,0 +1,22 @@
+:-use_module(library(clpfd)).
+Import necessário
+
+
+Paços:
+1.Declarar Variáveis
+2.Declarar Dominio de Variáveis
+3.Declarar Restrições
+4.Procura de Solução
+
+
+Ex:
+1. length(L,4). -> Lista de 4 variáveis
+2. Var in 0..9. -> 0 < Var < 9; 
+   domain(L,0,9)
+3. Var #=3
+   Var #> 3
+   #\/ -> OU
+   #/\ -> E
+   all_different(L). ->todos na lista sao diferentes
+   all_distinct(L). -> igual mas mais eficiente
+4.labeling([], VarList).
