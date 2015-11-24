@@ -1,5 +1,5 @@
 # PLOG 2015
 
 Prolog Projects
-*Meerkats
-*Meetings Scheduler
+* Meerkats
+* Meetings Scheduler
