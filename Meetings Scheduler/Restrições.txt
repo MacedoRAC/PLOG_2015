@@ -23,14 +23,14 @@ Ex:
 
 -------- PROJETO ------- 
 1. Variáveis:
-	Reunião -> Nome, Pessoas presença obrigatória, Pessoas presença preferencial, tipo de sala  (por exemplo, com projetor, com sistema  de  videoconferência, etc.), hora
+	Reunião -> Nome, Pessoas presença obrigatória, Pessoas presença preferencial, tipo de sala  (por exemplo, com projetor, com sistema  de  videoconferência, etc.), horas
       [Nome,[Pessoas Obrig], [Pessoas Pref.], [tipo], [hora]]
 	Salas -> Numero, tipo
       [Num, [tipos]]
 	Pessoa -> IDtrabalhador, reuniões
       [ID, [Reuniões]]
 
-2. hora[0, 24]
+2. horas[0, 24]
    reuniões[0,+]
 
 3. 
