@@ -23,18 +23,18 @@ Ex:
 
 -------- PROJETO ------- 
 1. Variáveis:
-	Reunião -> Nome, Pessoas presença obrigatória, Pessoas presença preferencial, tipo de sala  (por exemplo, com projetor, com sistema  de  videoconferência, etc.), horaInicio, horaFim
+	Reunião -> Nome, Pessoas presença obrigatória, Pessoas presença preferencial, tipo de sala  (por exemplo, com projetor, com sistema  de  videoconferência, etc.), horaInicio, duração
 	Salas -> Numero, tipo
-      [Num, [tipos]]
-	Pessoa -> IDtrabalhador, reuniões
-      [ID, [Reuniões]]
+	Pessoa -> IDtrabalhador
 
-2. horaInicio[0, 24]
-   horaFim[0,24]
+2. horaInicio 9..12\/14..20
    Sala[0,+]
    IDtrabalhador[0,+]
 
-3. 
+3. Não podem haver meetings no mesmo sitio ao mesmo tempo
+   Se um meeting precisar de um utensilio especifico tem de ser numa sala em que o mesmo esteja disponivel
+   duração+horaInicio < 20
+   
 
 
 
