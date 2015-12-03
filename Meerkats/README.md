@@ -1,2 +1,4 @@
 # PLOG_2015
-Prolog
+## Meerkats
+
+[Meerkats Game](http://www.boardgamegeek.com/boardgame/161090/meerkats).
