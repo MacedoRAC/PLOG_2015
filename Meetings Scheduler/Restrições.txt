@@ -33,7 +33,11 @@ Ex:
 
 3. Não podem haver meetings no mesmo sitio ao mesmo tempo
    Se um meeting precisar de um utensilio especifico tem de ser numa sala em que o mesmo esteja disponivel
-   duração+horaInicio < 20
+   duração+horaInicio < 20  -- DONE
+   pessoas obrigatorias têm de estar presentes
+   maximizar nao obrigatorias
+   nº pessoas <= capacidade Sala
+   pessoa nao pode estar em dois meetings sobrepostos
    
 
 
