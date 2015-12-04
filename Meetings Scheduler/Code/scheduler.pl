@@ -5,16 +5,17 @@
 %variables
 %working shedule
 schedule:-
-	length(Part, 12),
-	length(Meetings, 3),
-	length(Salas, 6),
-	length(Time, 9),
+	find_all(meeting(_), ListsSize), 
+	length(Meetings, ListsSize),
+	length(Time, ListsSize),
+	length(Salas, ListsSize),
+	%faltam os participantes aqui
 
-	domain(Part, 1, 12), all_distinct(Part),
-	domain(Meetings, 1, 3), all_distinct(Meetings),
-	domain(Salas, 1, 6), all_distinct(Salas),
-	domain(Time, 1, 9), all_distinct(TIme),
+	domain(Meetings, 1, ListsSize), all_distinct(Meetings),
+	domain(Time, 1, 8),
+	find_all(sala(_,_,_), SalasSize),
+	domain(Salas, 1, SalasSize),
+
 
 	duration(meeting(Meetings), Dur),
 	(Time + Dur) #< 9,
-	global_cardinality(Time, [])

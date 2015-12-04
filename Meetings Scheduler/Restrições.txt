@@ -38,8 +38,12 @@ Ex:
    maximizar nao obrigatorias
    nº pessoas <= capacidade Sala
    pessoa nao pode estar em dois meetings sobrepostos
+   disponibilidade dos participantes *
    
 
 
 
 
+
+
+numero de slots é dado pelo numero de reunioes
