@@ -13,15 +13,15 @@ participantID(10).
 participantID(11).
 participantID(12).
 
-%Metting(id, name)
-meeting(1, thesis_presentation).
-meeting(2, company_meeting).
-meeting(3, chairman_election).
+%Meeting(id, name)
+meeting(thesis_presentation).
+meeting(company_meeting).
+meeting(chairman_election).
 
 %Meetings duration
-duration(meeting(thesis_presentation),1).
-duration(meeting(company_meeting),1).
-duration(meeting(chairman_election),3).
+duration(meeting(thesis_presentation), 1).
+duration(meeting(company_meeting), 1).
+duration(meeting(chairman_election), 3).
 
 
 %obligatory and optional presences (idParticipante, meeting)
@@ -41,9 +41,9 @@ optional(5, chairman_election).
 optional(6, chairman_election).
 
 %Placement
-place(meeting(thesis_presentation),auditorium).
-place(meeting(company_meeting),normal).
-place(meeting(chairman_election),auditorium).
+place(meeting(thesis_presentation), auditorium).
+place(meeting(company_meeting), normal).
+place(meeting(chairman_election), auditorium).
 
 %Salas(Numero, Tipo, capacidade) -> Regular=normal, Auditorium=tem projetor, Conference Room=videoconferencia
 sala(1,normal, 5).
