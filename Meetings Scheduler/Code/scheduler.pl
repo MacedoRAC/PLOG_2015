@@ -9,13 +9,15 @@ schedule:-
 	length(Meetings, ListsSize),
 	length(Time, ListsSize),
 	length(Salas, ListsSize),
-	%faltam os participantes aqui
+	find_all(participantID(_), ParticipantsSize),
+	find_all(sala(_,_,_), SalasSize),
 
 	domain(Meetings, 1, ListsSize), all_distinct(Meetings),
+	domain(Participants, 1, ParticipantsSize), all_distinct(Participants),
 	domain(Time, 1, 8),
-	find_all(sala(_,_,_), SalasSize),
 	domain(Salas, 1, SalasSize),
 
 
 	duration(meeting(Meetings), Dur),
 	(Time + Dur) #< 9,
+	
