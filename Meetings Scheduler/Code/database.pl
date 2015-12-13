@@ -1,3 +1,6 @@
+
+:-use_module(library(lists)).
+
 %%%%%%%%%%%%%%%%%%%%%%% DATABASE %%%%%%%%%%%%%%%%%%%%%%% 
 %Participants ID
 participantID(1).
@@ -13,26 +16,26 @@ participantID(10).
 participantID(11).
 participantID(12).
 
-%Meeting(id, name)
-meeting(thesis_presentation).
-meeting(company_meeting).
-meeting(chairman_election).
+%Meeting(name, [obrigatoryParticipants], duration)
+meeting(thesis_presentation, [12, 3, 5], 1).
+meeting(company_meeting, [10, 3], 1).
+meeting(chairman_election, [1, 2, 3], 3).
 
 %Meetings duration
-duration(meeting(thesis_presentation), 1).
+/*duration(meeting(thesis_presentation), 1).
 duration(meeting(company_meeting), 1).
-duration(meeting(chairman_election), 3).
+duration(meeting(chairman_election), 3).*/
 
 
 %obligatory and optional presences (idParticipante, meeting)
-obligatory(12, thesis_presentation).
+/*obligatory(12, thesis_presentation).
 obligatory(3, thesis_presentation).
 obligatory(5, thesis_presentation).
 obligatory(10, company_meeting).
 obligatory(3, company_meeting).
 obligatory(1, chairman_election).
 obligatory(2, chairman_election).
-obligatory(3, chairman_election).
+obligatory(3, chairman_election).*/
 optional(1, thesis_presentation).
 optional(2, thesis_presentation).
 optional(5, company_meeting).
