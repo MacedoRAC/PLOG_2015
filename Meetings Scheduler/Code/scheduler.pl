@@ -5,28 +5,28 @@
 
 
 
-schedule(SalasCap-SalasCar) :- 
-	findall(meeting(_, _, _), _, Meetings)
+schedule:-
+	findall(Room, room(RoomID, SalasCar, SalasCap), Rooms),
+	findall(Meeting, meeting(_, _, _, _), MeetingsInDB),
 	length(MeetingsInDB,NumberOfMeetings),
 	length(SS,NumberOfMeetings),
 	length(ES,NumberOfMeetings),
-	length(Rooms,NumberOfMeetings),
-	length(Meetings,NumberOfMeetings),
+	length(RoomsForMeetings,NumberOfMeetings),
 	createDuration(MeetingsInDB,D),
-	createTasks(SS,D,ES,SalasReuniao,ReunioesTask),
+	createTasks(SS,D,ES,Rooms,ReunioesTask),
 	createMachines(SalasCap,Machines,1),
 	
 	
 	domain(SS,1,1000),
 	domain(D,1,1000),
 	domain(ES,1,1000),
-	domain(Rooms,1,NumberOfMeetings),
+	domain(RoomsForMeetings,1,NumberOfMeetings),
 	domain([End],1,1000),
 	domain([Evaluation],1,1000),
 	maximum(End,ES),
 	
-	assign_salas_reuniao(Rooms,MeetingsInDB,SalasCap-SalasCar),
-	assign_reuniao_participantes(Meetings,MeetingsInDB,Rooms,SalasCap,NumbOfOptionals),
+	assign_salas_reuniao(RoomsForMeetings,MeetingsInDB,SalasCap-SalasCar),
+	assign_reuniao_participantes(Meetings,MeetingsInDB,RoomsForMeetings,SalasCap,NumbOfOptionals),
 	time_constraint(Meetings,MeetingsInDB,SS,ES),
 	
 	cumulatives(ReunioesTask,Machines,[bound(upper)]),
@@ -34,7 +34,7 @@ schedule(SalasCap-SalasCar) :-
 	Evaluation #= NumbOfOptionals mod End * 10,
 	
 	append(SS,[End],Vars1),
-	append(Vars1,Rooms,Vars2),
+	append(Vars1,RoomsForMeetings,Vars2),
 	append(Vars2,Meetings,Vars3),
 	append(Vars3,[NumbOfOptionals],Vars4),
 	append(Vars4,[Evaluation],Vars5),
@@ -42,11 +42,8 @@ schedule(SalasCap-SalasCar) :-
 	
 	
 	flatten(Vars5,Vars),
-	
-	
-	
 	labeling([maximize(NumbOfOptionals)],Vars),
-	write(SS),nl,write(ES),nl,write(Rooms),nl,write(Meetings),nl,write(MeetingsInDB),nl,write(Evaluation).
+	write(SS),nl,write(ES),nl,write(RoomsForMeetings),nl,write(Meetings),nl,write(MeetingsInDB),nl,write(Evaluation).
 	
 
 assign_salas_reuniao(_,[],_).
@@ -148,4 +145,3 @@ time_constraint([],[],[],[]).
 time_constraint([HReunioes|TReunioes],[HReunioesPretendidas|TReunioesPretendidas],[HSS|TSS],[HES|TES]) :- 
 	avoid_same_time(HReunioes,HReunioesPretendidas,HSS,HES,TReunioes,TReunioesPretendidas,TSS,TES),
 	time_constraint(TReunioes,TReunioesPretendidas,TSS,TES).
-	

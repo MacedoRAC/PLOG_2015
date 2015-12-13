@@ -27,3 +27,19 @@ flatten(List, FlatList) :-
      flatten(Hd, FlatHeadTail, List),
      flatten(Tl, Tail, FlatHeadTail).
 flatten(NonList, Tl, [NonList|Tl]).
+
+createDuration([],[]).
+createDuration([[Duration,_,_,_]|TReunioesPretendidas],D) :- 
+	createDuration(TReunioesPretendidas,DT),
+	append([Duration],DT,D).
+	
+createTasks([],_,_,_,[]).
+createTasks([Hss|Tss],[Hd|Td],[He|Te],[Hm|Tm],L) :-
+	createTasks(Tss,Td,Te,Tm,Ltemp),
+	append([task(Hss,Hd,He,1,Hm)],Ltemp,L).
+
+createMachines([],[],_).	
+createMachines([_Hsala|Tsala],L,Count) :-
+	Count1 is Count + 1,
+	createMachines(Tsala,Ltemp,Count1),
+	append([machine(Count,1)],Ltemp,L).

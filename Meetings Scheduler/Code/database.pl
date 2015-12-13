@@ -24,9 +24,9 @@ place(meeting(company_meeting), normal).
 place(meeting(chairman_election), auditorium).
 
 %Salas(id, type, capacidade) -> Regular=normal, Auditorium=tem projetor, Conference Room=videoconferencia
-sala(1,normal, 5).
-sala(2,normal, 5).
-sala(3,normal, 5).
-sala(4,conference_room, 10).
-sala(5,conference_room, 10).
-sala(6,auditorium, 15).
+room(1,normal, 5).
+room(2,normal, 5).
+room(3,normal, 5).
+room(4,conference_room, 10).
+room(5,conference_room, 10).
+room(6,auditorium, 15).
