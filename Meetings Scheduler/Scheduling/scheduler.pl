@@ -27,6 +27,3 @@ assign_rooms([Hrooms|Trooms], RoomsCap-RoomsType). %TODO
 	
 assigne_participans_meeting(_,[],[],_,0).	
 assigne_participans_meeting([Hmeetings|Tmeetings],RoomCap). %TODO
-
-%count = 0 if intercept and 1 if no interception
-check_interceptions(). %TODO
